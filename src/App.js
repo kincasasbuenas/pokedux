@@ -6,7 +6,7 @@ import { Col } from 'antd/lib/grid';
 import './App.css';
 import PokemonList from './components/PokemonList';
 import logo from './assets/logo.svg'
-import { getPokemon } from './api';
+import { getPokemon, getPokemonDetails } from './api';
 import { setPokemons } from './actions';
 
 function App() {
@@ -17,7 +17,10 @@ function App() {
   useEffect(() => {
     const fecthPokemons = async () => {
       const resultPokemons = await getPokemon();
-      dispatch(setPokemons(resultPokemons));
+      const pokemonsDetailed = await Promise.all(
+        resultPokemons.map((pokemon) => getPokemonDetails(pokemon))
+      );
+      dispatch(setPokemons(pokemonsDetailed));
     }
     fecthPokemons();
   }, [])
