@@ -2,37 +2,50 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Search from './components/Search';
-import { Col } from 'antd/lib/grid';
+import { Col, Spin, Row } from 'antd';
 import './App.css';
 import PokemonList from './components/PokemonList';
 import logo from './assets/logo.svg'
 import { getPokemon } from './api';
-import { getPokemonsWithDetails } from './actions';
+import { getPokemonsWithDetails, setLoading  } from './actions';
 
 function App() {
 
   const pokemons = useSelector((state) => state.pokemons);
+  const loading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fecthPokemons = async () => {
+      dispatch(setLoading(true));
       const resultPokemons = await getPokemon();
       dispatch(getPokemonsWithDetails(resultPokemons));
+      dispatch(setLoading(false));
     }
     fecthPokemons();
   }, [])
   
   return (
     <div className="App">
-      <Col span={4} offset={10}>
-        <img src={logo} className="logo" alt='Pokedux' />
-      </Col>
-      <Col span={8} offset={8}>
-        <Search/>
-      </Col>
-      <Col span={14} offset={2}>
-        <PokemonList pokemons={pokemons}/>
-      </Col>
+      <Row justify={'center'}>
+        <Col xs={12} md={12} >
+          <img src={logo} className="logo" alt='Pokedux' />
+        </Col>
+      </Row>
+      <Row justify={'center'} >
+        <Col xs={12} md={12}>
+          <Search/>
+        </Col>
+      </Row>
+      <Row justify={'center'} gutter={[15, 15]} style={{marginTop:30}}>
+        {loading ? (
+          <Col xs={12} md={12}>
+            <Spin spinning size='large' />
+          </Col>
+        ) : (
+          <PokemonList pokemons={pokemons} />
+        )}
+      </Row>
     </div>
   );
 }

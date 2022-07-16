@@ -7,4 +7,5 @@
 
 .App .logo{
   margin-bottom: 3rem;
+  max-width: 250px;
 }
