@@ -6,23 +6,16 @@ import { Col, Spin, Row } from 'antd';
 import './App.css';
 import PokemonList from './components/PokemonList';
 import logo from './assets/logo.svg'
-import { getPokemon } from './api';
-import { getPokemonsWithDetails, setLoading  } from './actions';
+import { fetchPokemonsWithDetails } from './slices/dataSlice';
 
 function App() {
 
-  const pokemons = useSelector((state) => state.getIn(['data','pokemons'], shallowEqual )).toJS();
-  const loading = useSelector((state) => state.getIn(['ui','loading']));
+  const pokemons = useSelector((state) => state.data.pokemons, shallowEqual);
+  const loading = useSelector((state) => state.ui.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fecthPokemons = async () => {
-      dispatch(setLoading(true));
-      const resultPokemons = await getPokemon();
-      dispatch(getPokemonsWithDetails(resultPokemons));
-      dispatch(setLoading(false));
-    }
-    fecthPokemons();
+    dispatch(fetchPokemonsWithDetails());
   }, [])
   
   return (
