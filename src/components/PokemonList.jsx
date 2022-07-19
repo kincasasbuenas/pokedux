@@ -5,15 +5,27 @@ import '../styles/PokemonList.css'
 const PokemonList = ({pokemons}) => {
   return (
     <>
-        {pokemons.map((pokemon)=>{
-            return <PokemonCard  
-              name={pokemon.name} 
-              image={pokemon.sprites.front_default}
-              types={pokemon.types}
-              id={pokemon.id}
-              favorite={pokemon.favorite}
-              key={pokemon.name}/>
-        })}
+        {
+          pokemons.length === 0 ?
+           (
+            <p> no se encontraron resultados</p>
+           )
+           :
+           (
+            <>
+              {pokemons.map((pokemon)=>{
+                return <PokemonCard  
+                  name={pokemon.name} 
+                  image={pokemon.sprites.front_default}
+                  types={pokemon.types}
+                  id={pokemon.id}
+                  favorite={pokemon.favorite}
+                  key={pokemon.name}/>
+            })}
+            </>
+           )
+        }
+        
     </>
   )
 }
