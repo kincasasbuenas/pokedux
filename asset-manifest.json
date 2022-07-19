@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/kincasasbuenas/pokedux/static/css/main.3e06743c.css",
+    "main.js": "/kincasasbuenas/pokedux/static/js/main.bdfd482b.js",
+    "static/media/logo.svg": "/kincasasbuenas/pokedux/static/media/logo.0905522d6d18ceaafa60a31e87c99e88.svg",
+    "index.html": "/kincasasbuenas/pokedux/index.html",
+    "main.3e06743c.css.map": "/kincasasbuenas/pokedux/static/css/main.3e06743c.css.map",
+    "main.bdfd482b.js.map": "/kincasasbuenas/pokedux/static/js/main.bdfd482b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3e06743c.css",
+    "static/js/main.bdfd482b.js"
+  ]
+}
